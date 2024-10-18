@@ -33,7 +33,7 @@ namespace HomeApi.Controllers
             pageResult.Append($"Жилая площадь:             {_options.Value.Area} м2{Environment.NewLine}"); 
             pageResult.Append($"Материал:                  {_options.Value.Material}{Environment.NewLine}"); 
             pageResult.Append($"{Environment.NewLine}"); 
-            pageResult.Append($"Адрес:                     {_options.Value.Address.Street} {_options.Value.Address.House}");
+            pageResult.Append($"Адрес:                     {_options.Value.Address.Street}/{_options.Value.Address.House}{Environment.NewLine}");
 
             return StatusCode(200, pageResult.ToString());
         }

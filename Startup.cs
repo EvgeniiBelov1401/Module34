@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
@@ -17,10 +18,10 @@ namespace WebApiVS
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
-        {
-            Configuration = configuration;
-        }
+        //public Startup(IConfiguration configuration)
+        //{
+        //    Configuration = configuration;
+        //}
 
         private IConfiguration Configuration
         { get; } = new ConfigurationBuilder()
@@ -30,7 +31,11 @@ namespace WebApiVS
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<HomeOptions>(Configuration.GetSection("HomeOptions"));
+            services.Configure<HomeOptions>(Configuration);
+            services.Configure<HomeOptions>(opt =>
+            {
+                opt.Area = 120;
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c => {
